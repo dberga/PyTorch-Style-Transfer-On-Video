@@ -163,15 +163,15 @@ def apply_style_transfer(content_img_dir, style_img_dir):
 	num_content_imgs = len([name for name in os.listdir(content_img_dir) if os.path.isfile(os.path.join(content_img_dir, name))])
 	num_style_imgs = len([name for name in os.listdir(style_img_dir) if os.path.isfile(os.path.join(style_img_dir, name))])
 	# Divide the style images equally among the input frames:
-	frames_with_current_style = num_content_imgs // (num_style_imgs - 1)
+	frames_with_current_style = num_content_imgs // (num_style_imgs )
 
 	# Since there are 249 frames in the test video, you can use for loop, but prefer using while to avoid using magic numbers (hardcoding):
 	while(content_image_count <= num_content_imgs): 
 	#for i in range(1, total_frames):
 		# Load in the content and style images and move them to the GPU if available:
 		content_image = load_image(content_img_dir + '/frame_' + str(content_image_count) + '.jpg').to(device)
-		if(content_image_count % frames_with_current_style == 0):
-			style_image_count += 1
+		#if(content_image_count % frames_with_current_style == 0):
+		#	style_image_count += 1
 
 		style_image = load_image(style_img_dir + '/style_' + str(style_image_count) + '.jpg', shape=content_image.shape[-2:]).to(device)
 
